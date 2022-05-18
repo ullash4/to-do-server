@@ -42,6 +42,17 @@ async function run() {
         res.send(result)
     })
 
+    // make task complete
+    app.put('/task/complete/:id', async(req, res)=>{
+        const id = req.params.id;
+        const filter = {_id:ObjectId(id)}
+        const updateDoc = {
+            $set:{role : 'complete'}
+        }
+        const result =await taskCollection.updateOne(filter, updateDoc)
+        res.send(result)
+    })
+
     } finally {
     //   await client.close();
     }
