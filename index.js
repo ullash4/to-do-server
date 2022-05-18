@@ -20,7 +20,12 @@ async function run() {
       await client.connect();
       const taskCollection=client.db("TaskList").collection("tasks")
 
-     
+      //get all task
+      app.get('/task', async(req, res)=>{
+        const query = {};
+        const result = await taskCollection.find(query).toArray();
+        res.send(result)
+    })
 
       // create tasks
       app.post('/task', async(req, res)=>{
